@@ -1,0 +1,35 @@
+<%= link_to image_tag("return.png", style: "width: 50px; margin-top: 50px;
+margin-left: 50px;"), "/portfolio" %>
+<body class="bg-info bg-gradient">
+<center><br><br><h1><%= link_to 'The Cloud App', weather_path %></h1>
+<br><br><br><br>
+<h4>Cloud.. Clouds.. Are you there?!</h4>
+<br>
+<div class="container">
+	<%= form_with(url: weather_path, method: "get", local: true, :class => 'form-inline') do %>
+	  <%= label_tag(:location, "Enter the name of a city:") %><br>
+	  <%= text_field_tag(:location, nil, class: "form-control") %>
+	  <%= submit_tag("Search", class: "btn btn-default") %>
+	<% end %>
+</div>
+<br><br><br>
+
+<div>
+	<% if @error %>
+		<h4><%= @error %></h4>
+	<% elsif @weather && @weather.include?("cloud") %>
+  	<h4>Yes, there are clouds!<br><br> There is <%= @weather %> in <%= @location %>.<h4>
+	<% elsif @weather %>
+		<h4>No clouds! There is <%= @weather %> in <%= @location %>.<h4>
+	<% end %>
+	<% if @weather_icon %>
+		<%= image_tag @weather_icon %>
+	<% end %>
+</div>
+</center>
+
+<footer class="footer">
+	<p>
+		Copyright &copy; <%= Time.now.year %> Connor McElvain
+	</p>
+</footer>
